@@ -3,16 +3,101 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blipkart — Elite Gear for Elite Athletes</title>
+    <title>Blipkart</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Font Montserat -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome for social icons in auth modal -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
+    <main>
+    <!-- ===================== AUTH MODAL ===================== -->
+    <div id="auth-modal" class="auth-modal-overlay">
+      <div class="auth-modal-box">
+        <button class="auth-modal-close" onclick="closeAuthModal()">✕</button>
+        <input type="checkbox" id="auth-toggle" class="auth-toggle-checkbox" />
+
+        <!-- Sign Up Form -->
+        <div class="auth-form-container auth-sign-up">
+          <form onsubmit="return false;">
+            <h1>Create Account</h1>
+            <div class="auth-social-icons">
+              <div class="auth-icon">
+                <i class="fa-brands fa-google-plus-g"></i>
+              </div>
+              <div class="auth-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+              <div class="auth-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="auth-icon">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </div>
+            </div>
+            <span>or use your email for registration</span>
+            <input placeholder="Name" type="text" />
+            <input placeholder="Email" type="email" />
+            <input placeholder="Password" type="password" />
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="auth-form-container auth-sign-in">
+          <form onsubmit="return false;">
+            <h1>Sign In</h1>
+            <div class="auth-social-icons">
+              <div class="auth-icon">
+                <i class="fa-brands fa-google-plus-g"></i>
+              </div>
+              <div class="auth-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+              </div>
+              <div class="auth-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="auth-icon">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </div>
+            </div>
+            <span>or use your email and password</span>
+            <input placeholder="Email" type="email" />
+            <input placeholder="Password" type="password" />
+            <a href="#">Forgot Your Password?</a>
+            <button type="submit">Sign In</button>
+          </form>
+        </div>
+
+        <!-- Toggle Panel -->
+        <div class="auth-toggle-container">
+          <div class="auth-toggle">
+            <div class="auth-toggle-panel auth-toggle-left">
+              <h1>Welcome Back!</h1>
+              <p>Enter your personal details to use all of site features</p>
+              <label for="auth-toggle">Sign In</label>
+            </div>
+            <div class="auth-toggle-panel auth-toggle-right">
+              <h1>Hello, Friend!</h1>
+              <p>
+                Register with your personal details to use all of site features
+              </p>
+              <label for="auth-toggle">Sign Up</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== /AUTH MODAL ===================== -->
+
     <!-- Header -->
     <div class="header">
       <div class="container">
@@ -23,12 +108,10 @@
             <a href="products.html">Products</a>
             <a href="">About</a>
             <a href="">Contact</a>
-            <a href="">Account</a>
+            <a href="" onclick="openAuthModal(event)">Account</a>
           </div>
           <div class="cart-icon-wrapper">
-            <a href="cart.html"
-               >🛒<!--<img src="images/shopping-cart.png" width="20px" alt="Cart"/>-->
-            </a>
+            <a href="cart.html">🛒</a>
             <span id="cart-count" class="cart-badge">0</span>
           </div>
           <label class="menu-icon" for="menu-toggle">
@@ -41,36 +124,126 @@
           <a href="products.html">Products</a>
           <a href="">About</a>
           <a href="">Contact</a>
-          <a href="">Account</a>
+          <a href="" onclick="openAuthModal(event)">Account</a>
         </div>
       </div>
     </div>
 
+    <!-- ===================== HERO ===================== -->
     <div class="hero">
+      <div class="hero-bg-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+      </div>
       <div class="container">
-        <div class="headerContent">
-          <div class="headerContentItem">
-            <h1>Elite Gear for<br />Elite Athletes</h1>
+        <div class="hero-content">
+          <!-- Text Side -->
+          <div class="hero-text">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              New Collection 2026 — Now Live
+            </div>
+            <h1>
+              Gear Up.<br />
+              <span class="hero-highlight">Perform.</span><br />
+              Dominate.
+            </h1>
             <p>
-              Where performance meets style. Experience sportswear<br />engineered
-              for excellence, designed for champions.
+              Where performance meets style. Experience sportswear<br />
+              engineered for excellence, designed for champions.
             </p>
+
+            <!-- Stats row -->
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>50K+</strong>
+                <span>Happy Athletes</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <strong>500+</strong>
+                <span>Premium Products</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <strong>4.9★</strong>
+                <span>Avg. Rating</span>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="hero-ctas">
+              <a href="products.html" class="hero-btn-primary">
+                Shop Now &nbsp;→
+              </a>
+              <a href="#categories-section" class="hero-btn-secondary">
+                Explore Gear
+              </a>
+            </div>
+
+            <!-- Trust chips -->
+            <div class="hero-trust">
+              <span>✅ Free Delivery over ₹999</span>
+              <span>🔄 Easy 30-Day Returns</span>
+              <span>🔒 Secure Checkout</span>
+            </div>
           </div>
-          <div class="headerContentItem">
-            <img src="images/img 1.jpg" alt="Hero" />
+
+          <!-- Image Side -->
+          <div class="hero-image-wrapper">
+            <div class="hero-img-glow"></div>
+            <div class="hero-img-card">
+              <img src="images/img 1.jpg" alt="Elite Athlete Gear" />
+            </div>
+            <!-- Floating badges on image -->
+            <div class="hero-float-badge hero-float-top">🔥 Trending Today</div>
+            <div class="hero-float-badge hero-float-bottom">
+              <strong>Up to 50% OFF</strong> on select items
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- ===================== /HERO ===================== -->
 
-    <!-- Categories -->
-    <div class="categories">
+    <!-- ===================== CATEGORIES ===================== -->
+    <div class="categories" id="categories-section">
+      <div class="categories-header">
+        <p class="categories-eyebrow">What are you looking for?</p>
+        <h2>Shop by Category</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
+      </div>
       <div class="container">
-        <img src="images/img 2.jpg" alt="Category 1" />
-        <img src="images/img 3.jpg" alt="Category 2" />
-        <img src="images/img 4.jpg" alt="Category 3" />
+        <div class="category-card">
+          <img src="images/img 2.jpg" alt="Footwear" />
+          <div class="category-overlay">
+            <span class="category-icon">👟</span>
+            <strong>Footwear</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="images/img 3.jpg" alt="Apparel" />
+          <div class="category-overlay">
+            <span class="category-icon">👕</span>
+            <strong>Apparel</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="images/img 4.jpg" alt="Accessories" />
+          <div class="category-overlay">
+            <span class="category-icon">🎧</span>
+            <strong>Accessories</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- ===================== /CATEGORIES ===================== -->
 
     <!-- Featured Products -->
     <div class="featured-products">
@@ -100,15 +273,20 @@
 
     <!-- Banner -->
     <div class="banner">
+      <div class="exclusiveProductsHeader">
+        <h2>Blipkart Exclusives</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
       <div class="container">
         <div class="bannerImg">
           <img src="images/img 9.webp" alt="Smart Watch Banner" />
         </div>
         <div class="bannerContent">
           <span class="bannerTitle">Exclusively on Blipkart</span>
-          <h1 class="bannerSubTitle">Smart<br />Watch</h1>
+          <h1 class="bannerSubTitle">Smart<br/>Watch</h1>
           <span class="bannerDescription"
-            >Noise ColorFit Pro 5 — 1.85" HD Display, SpO2 & Heart Rate, 7-Day
+            >Hammer ColorFit Pro 5 — 1.85" HD Display, SpO2 & Heart Rate, 7-Day
             Battery</span
           >
           <div>
@@ -155,7 +333,7 @@
             <img src="images/empty star.png" alt="star" width="15px" />
           </div>
           <img class="userImg" src="images/testimonial 1.jpg" alt="" />
-          <h3>Rahul Mehta</h3>
+          <h3>George Smith</h3>
         </div>
         <div class="testimonialCards">
           <p class="testimonialContetnt">
@@ -186,6 +364,7 @@
         <img src="images/philips-logo-png_seeklogo-108446.png" alt="Philips" />
       </div>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -218,11 +397,16 @@
           <p>Youtube</p>
         </div>
       </div>
+      <div class="footer-credits">
+          <p>© 2026 <a href="https://anchita-biswas.github.io/Responsive-Portfolio/" target="_blank">Anchita.</a>
+             Designed & Built with ❤️
+          </p>
+        </div>
     </footer>
 
     <script src="cart.js"></script>
     <script>
-      // Inject featured products (IDs 1-4)
+      // ── Product injection ──────────────────────────────────────
       const featured = [1, 6, 7, 10];
       const latest = [2, 3, 4, 5, 8, 9, 11, 12];
 
@@ -238,6 +422,32 @@
           buildProductCardHTML(BLIPKART_PRODUCTS.find((p) => p.id === id)),
         )
         .join("");
+
+      // ── Auth modal ────────────────────────────────────────────
+      function openAuthModal(e) {
+        if (e) e.preventDefault();
+        document.getElementById("auth-modal").classList.add("auth-modal-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeAuthModal() {
+        document
+          .getElementById("auth-modal")
+          .classList.remove("auth-modal-open");
+        document.body.style.overflow = "";
+      }
+
+      // Close when clicking the backdrop
+      document
+        .getElementById("auth-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeAuthModal();
+        });
+
+      // Close on Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeAuthModal();
+      });
     </script>
   </body>
 </html>
