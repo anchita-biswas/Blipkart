@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart — Blipkart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <div class="navbar">
+          <a href="index.html" class="nav-logo">Blip<span>kart</span></a>
+          <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">Account</a>
+          </div>
+          <div class="cart-icon-wrapper">
+            <a href="cart.html"><img src="images/shopping-cart.png" width="20px" alt="Cart" /></a>
+            <span id="cart-count" class="cart-badge">0</span>
+          </div>
+          <label class="menu-icon" for="menu-toggle">
+            <img src="images/menu.png" alt="Menu" />
+          </label>
+        </div>
+        <input type="checkbox" id="menu-toggle" />
+        <div class="hidden-nav-items">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+          <a href="">Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="carts-section-wrapper">
+      <h2 class="cart-page-title">🛒 Your Shopping Cart</h2>
+      <div id="cart-content">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footerInnerContainer">
+        <div class="footerColumn footerColumn1">
+          <div class="footerBrand">Blip<span>kart</span></div>
+          <p>Your one-stop destination for premium sportswear, footwear, and accessories.</p>
+          <h3>Download Our App</h3>
+          <div class="footerStoreContainer">
+            <img src="images/google play.png" alt="Google Play" />
+            <img src="images/app store.webp" alt="App Store" />
+          </div>
+        </div>
+        <div class="footerColumn footerColumn2">
+          <h3>Useful Links</h3>
+          <p>Coupons</p>
+          <p>Blog Post</p>
+          <p>Return Policy</p>
+          <p>Join Affiliate</p>
+        </div>
+        <div class="footerColumn footerColumn3">
+          <h3>Follow Us</h3>
+          <p>Facebook</p>
+          <p>Twitter</p>
+          <p>Instagram</p>
+          <p>Youtube</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+      const TAX_RATE = 0.05; // 5% GST
+
+      function renderCart() {
+        const cart = getCart();
+        const container = document.getElementById('cart-content');
+
+        if (cart.length === 0) {
+          container.innerHTML = `
+            <div class="empty-cart-msg">
+              <div class="empty-icon">🛒</div>
+              <h3>Your cart is empty!</h3>
+              <p>Looks like you haven't added anything yet. Let's fix that.</p>
+              <a href="products.html" class="shop-now-btn">Start Shopping</a>
+            </div>`;
+          return;
+        }
+
+        // Build table rows
+        const rowsHTML = cart.map(item => `
+          <tr id="row-${item.key}">
+            <td>
+              <div class="cart-info">
+                <img class="cart-item-img" src="${item.image}" alt="${item.name}" />
+                <div class="cart-info-details">
+                  <span class="cart-item-name">${item.name}</span>
+                  <span class="cart-item-brand">${item.brand}</span>
+                  <span class="cart-item-size">Size: ${item.size}</span>
+                  <span class="cart-item-price">Unit price: ${formatPrice(item.price)}</span>
+                  <button class="remove-btn" onclick="handleRemove('${item.key}')">Remove</button>
+                </div>
+              </div>
+            </td>
+            <td>
+              <input
+                class="qty-input"
+                type="number"
+                value="${item.qty}"
+                min="1"
+                max="10"
+                onchange="handleQtyChange('${item.key}', this.value)"
+              />
+            </td>
+            <td>
+              <span class="subtotal-cell" id="sub-${item.key}">${formatPrice(item.price * item.qty)}</span>
+            </td>
+          </tr>`).join('');
+
+        // Calculate totals
+        const subtotal = getCartSubtotal();
+        const tax      = Math.round(subtotal * TAX_RATE);
+        const total    = subtotal + tax;
+
+        container.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="cart-tbody">
+              ${rowsHTML}
+            </tbody>
+          </table>
+
+          <div class="total-price">
+            <div>
+              <table id="totals-table">
+                <tr>
+                  <td>Subtotal</td>
+                  <td id="total-subtotal">${formatPrice(subtotal)}</td>
+                </tr>
+                <tr>
+                  <td>GST (5%)</td>
+                  <td id="total-tax">${formatPrice(tax)}</td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td id="total-final">${formatPrice(total)}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="total-price">
+            <span class="checkout-btn" onclick="handleCheckout()">Proceed to Checkout →</span>
+          </div>`;
+      }
+
+      function handleRemove(key) {
+        removeFromCart(key);
+        renderCart();
+        showToast('Item removed from cart');
+      }
+
+      function handleQtyChange(key, newQty) {
+        const qty = parseInt(newQty);
+        if (isNaN(qty) || qty < 1) {
+          // If set to 0 or invalid, ask before removing
+          if (confirm('Remove this item from your cart?')) {
+            handleRemove(key);
+          } else {
+            renderCart(); // reset to previous value
+          }
+          return;
+        }
+        updateCartQty(key, qty);
+
+        // Update only the subtotal cell without full re-render
+        const cart = getCart();
+        const item = cart.find(i => i.key === key);
+        if (item) {
+          const subEl = document.getElementById('sub-' + key);
+          if (subEl) subEl.textContent = formatPrice(item.price * item.qty);
+        }
+
+        // Recalculate totals
+        const subtotal = getCartSubtotal();
+        const tax      = Math.round(subtotal * TAX_RATE);
+        const total    = subtotal + tax;
+
+        const subEl   = document.getElementById('total-subtotal');
+        const taxEl   = document.getElementById('total-tax');
+        const finalEl = document.getElementById('total-final');
+        if (subEl)   subEl.textContent   = formatPrice(subtotal);
+        if (taxEl)   taxEl.textContent   = formatPrice(tax);
+        if (finalEl) finalEl.textContent = formatPrice(total);
+      }
+
+      function handleCheckout() {
+        showToast('🎉 Checkout coming soon! Thank you for shopping at Blipkart.');
+      }
+
+      // Initial render
+      renderCart();
+    </script>
+  </body>
+</html>

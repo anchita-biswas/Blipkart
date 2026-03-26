@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Products — Blipkart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <div class="navbar">
+          <a href="index.html" class="nav-logo">Blip<span>kart</span></a>
+          <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">Account</a>
+          </div>
+          <div class="cart-icon-wrapper">
+            <a href="cart.html"><img src="images/shopping-cart.png" width="20px" alt="Cart" /></a>
+            <span id="cart-count" class="cart-badge">0</span>
+          </div>
+          <label class="menu-icon" for="menu-toggle">
+            <img src="images/menu.png" alt="Menu" />
+          </label>
+        </div>
+        <input type="checkbox" id="menu-toggle" />
+        <div class="hidden-nav-items">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+          <a href="">Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Products -->
+    <div class="allProductsSection">
+      <div class="allProductsSectionLabel">
+        <h2>All Products <span id="product-count" style="font-size:15px;color:#999;font-weight:400;"></span></h2>
+        <select id="sort-select" onchange="renderProducts()">
+          <option value="default">Default Sorting</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Sort by Rating</option>
+          <option value="discount">Sort by Discount</option>
+        </select>
+      </div>
+
+      <!-- Filter chips -->
+      <div id="filter-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;"></div>
+
+      <!-- Product Grid -->
+      <div class="featured-products" style="padding:0;margin:0;max-width:unset;">
+        <div class="productContainer" id="all-products-container"></div>
+      </div>
+
+      <div class="pageinationButtonContainer">
+        <span class="pageinationButtons active">1</span>
+        <span class="pageinationButtons">2</span>
+        <span class="pageinationButtons">3</span>
+        <span class="pageinationButtons">→</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footerInnerContainer">
+        <div class="footerColumn footerColumn1">
+          <div class="footerBrand">Blip<span>kart</span></div>
+          <p>Your one-stop destination for premium sportswear, footwear, and accessories.</p>
+          <h3>Download Our App</h3>
+          <div class="footerStoreContainer">
+            <img src="images/google play.png" alt="Google Play" />
+            <img src="images/app store.webp" alt="App Store" />
+          </div>
+        </div>
+        <div class="footerColumn footerColumn2">
+          <h3>Useful Links</h3>
+          <p>Coupons</p>
+          <p>Blog Post</p>
+          <p>Return Policy</p>
+          <p>Join Affiliate</p>
+        </div>
+        <div class="footerColumn footerColumn3">
+          <h3>Follow Us</h3>
+          <p>Facebook</p>
+          <p>Twitter</p>
+          <p>Instagram</p>
+          <p>Youtube</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+      const categories = [...new Set(BLIPKART_PRODUCTS.map(p => p.category))];
+      let activeCategory = null;
+
+      // Render filter chips
+      const chipsEl = document.getElementById('filter-chips');
+      const allChip = document.createElement('span');
+      allChip.textContent = 'All';
+      allChip.style.cssText = 'padding:6px 16px;border-radius:20px;border:1px solid #ff523b;cursor:pointer;font-size:13px;background:#ff523b;color:#fff;';
+      allChip.onclick = () => { activeCategory = null; updateChips(); renderProducts(); };
+      chipsEl.appendChild(allChip);
+
+      categories.forEach(cat => {
+        const chip = document.createElement('span');
+        chip.textContent = cat;
+        chip.dataset.cat = cat;
+        chip.style.cssText = 'padding:6px 16px;border-radius:20px;border:1px solid #ddd;cursor:pointer;font-size:13px;color:#555;transition:all 0.2s;';
+        chip.onmouseenter = () => { if (activeCategory !== cat) chip.style.borderColor = '#ff523b'; };
+        chip.onmouseleave = () => { if (activeCategory !== cat) chip.style.borderColor = '#ddd'; };
+        chip.onclick = () => { activeCategory = cat; updateChips(); renderProducts(); };
+        chipsEl.appendChild(chip);
+      });
+
+      function updateChips() {
+        chipsEl.querySelectorAll('span').forEach((chip, i) => {
+          const isActive = (i === 0 && !activeCategory) || chip.dataset.cat === activeCategory;
+          chip.style.background = isActive ? '#ff523b' : '';
+          chip.style.color = isActive ? '#fff' : '#555';
+          chip.style.borderColor = isActive ? '#ff523b' : '#ddd';
+        });
+      }
+
+      function renderProducts() {
+        let products = activeCategory
+          ? BLIPKART_PRODUCTS.filter(p => p.category === activeCategory)
+          : [...BLIPKART_PRODUCTS];
+
+        const sort = document.getElementById('sort-select').value;
+        if (sort === 'price-low')  products.sort((a,b) => a.price - b.price);
+        if (sort === 'price-high') products.sort((a,b) => b.price - a.price);
+        if (sort === 'rating')     products.sort((a,b) => b.rating - a.rating);
+        if (sort === 'discount')   products.sort((a,b) => discountPct(b.price,b.mrp) - discountPct(a.price,a.mrp));
+
+        document.getElementById('product-count').textContent = `(${products.length})`;
+        document.getElementById('all-products-container').innerHTML =
+          products.map(p => buildProductCardHTML(p)).join('');
+      }
+
+      renderProducts();
+    </script>
+  </body>
+</html>

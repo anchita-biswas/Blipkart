@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details — Blipkart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <div class="navbar">
+          <a href="index.html" class="nav-logo">Blip<span>kart</span></a>
+          <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">Account</a>
+          </div>
+          <div class="cart-icon-wrapper">
+            <a href="cart.html"><img src="images/shopping-cart.png" width="20px" alt="Cart" /></a>
+            <span id="cart-count" class="cart-badge">0</span>
+          </div>
+          <label class="menu-icon" for="menu-toggle">
+            <img src="images/menu.png" alt="Menu" />
+          </label>
+        </div>
+        <input type="checkbox" id="menu-toggle" />
+        <div class="hidden-nav-items">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+          <a href="">Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Container -->
+    <div class="product-details-container" id="product-details-container">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Related Products -->
+    <div class="allProductsSection">
+      <div class="allProductsSectionLabel" style="margin-top:40px;">
+        <h2>Related Products</h2>
+        <a href="products.html" style="color:#ff523b;font-size:14px;text-decoration:none;">View All →</a>
+      </div>
+      <div class="featured-products" style="padding:0;margin:0;max-width:unset;">
+        <div class="productContainer" id="related-products-container"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footerInnerContainer">
+        <div class="footerColumn footerColumn1">
+          <div class="footerBrand">Blip<span>kart</span></div>
+          <p>Your one-stop destination for premium sportswear, footwear, and accessories.</p>
+          <h3>Download Our App</h3>
+          <div class="footerStoreContainer">
+            <img src="images/google play.png" alt="Google Play" />
+            <img src="images/app store.webp" alt="App Store" />
+          </div>
+        </div>
+        <div class="footerColumn footerColumn2">
+          <h3>Useful Links</h3>
+          <p>Coupons</p>
+          <p>Blog Post</p>
+          <p>Return Policy</p>
+          <p>Join Affiliate</p>
+        </div>
+        <div class="footerColumn footerColumn3">
+          <h3>Follow Us</h3>
+          <p>Facebook</p>
+          <p>Twitter</p>
+          <p>Instagram</p>
+          <p>Youtube</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const productId = parseInt(params.get('id')) || 1;
+      const product = BLIPKART_PRODUCTS.find(p => p.id === productId);
+
+      if (!product) {
+        document.getElementById('product-details-container').innerHTML =
+          '<p style="text-align:center;padding:80px;color:#999;">Product not found. <a href="products.html" style="color:#ff523b;">Browse all products →</a></p>';
+      } else {
+        // Update page title
+        document.title = product.name + ' — Blipkart';
+
+        // Build thumbnail images HTML
+        const thumbsHTML = product.images.slice(1).map((img, i) => `
+          <div class="product-small-img-container ${i === 0 ? 'active' : ''}" onclick="switchImage('${img}', this)">
+            <img src="${img}" alt="${product.name}" loading="lazy" />
+          </div>`).join('');
+
+        // Build sizes options
+        const sizesHTML = product.sizes.map(s =>
+          `<option value="${s}">${s}</option>`).join('');
+
+        // Build specs list
+        const specsList = product.specs.split('|').map(s =>
+          `<li>${s.trim()}</li>`).join('');
+
+        const pct = discountPct(product.price, product.mrp);
+
+        document.getElementById('product-details-container').innerHTML = `
+          <!-- Images -->
+          <div class="product-details-content product-details-img-content">
+            <img src="${product.images[0]}" alt="${product.name}" class="product-details-big-image" id="big-product-img" />
+            <div class="product-small-img-container-wrapper">
+              ${thumbsHTML}
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="product-details-content product-details-text-content">
+            <p class="breadcrumb">Home / ${product.category}</p>
+            <p class="product-brand">${product.brand}</p>
+            <h1>${product.name}</h1>
+
+            <div class="detail-star-row">
+              ${renderStarsHTML(product.rating)}
+              <span style="font-size:14px;font-weight:600;color:#333;">${product.rating}</span>
+              <span class="review-count">(${product.reviews.toLocaleString('en-IN')} ratings)</span>
+            </div>
+
+            <div class="price-block">
+              <span class="detail-price">${formatPrice(product.price)}</span>
+              <span class="detail-mrp">${formatPrice(product.mrp)}</span>
+              <span class="detail-discount">${pct}% off</span>
+            </div>
+
+            <p class="size-label">Select Size:</p>
+            <select id="size-select">
+              <option value="">-- Choose Size --</option>
+              ${sizesHTML}
+            </select>
+
+            <div class="add-to-cart-wrapper">
+              <input type="number" id="qty-input" value="1" min="1" max="10" />
+              <button class="add-to-cart-button" onclick="handleAddToCart()">Add To Cart</button>
+            </div>
+
+            <div class="product-desc-section">
+              <h3>Product Description</h3>
+              <p>${product.description}</p>
+              <h3>Key Features</h3>
+              <ul class="specs-list">${specsList}</ul>
+            </div>
+          </div>`;
+
+        // Related products (same category, exclude current)
+        const related = BLIPKART_PRODUCTS
+          .filter(p => p.category === product.category && p.id !== product.id)
+          .concat(BLIPKART_PRODUCTS.filter(p => p.category !== product.category && p.id !== product.id))
+          .slice(0, 4);
+
+        document.getElementById('related-products-container').innerHTML =
+          related.map(p => buildProductCardHTML(p)).join('');
+      }
+
+      function switchImage(src, thumbEl) {
+        document.getElementById('big-product-img').src = src.replace('w=200&h=200', 'w=500&h=600');
+        document.querySelectorAll('.product-small-img-container').forEach(el => el.classList.remove('active'));
+        thumbEl.classList.add('active');
+      }
+
+      function handleAddToCart() {
+        const sizeEl = document.getElementById('size-select');
+        const qtyEl  = document.getElementById('qty-input');
+        const size   = sizeEl ? sizeEl.value : 'Free Size';
+        const qty    = parseInt(qtyEl.value) || 1;
+
+        if (!size) {
+          showToast('⚠️ Please select a size first');
+          sizeEl.style.borderColor = '#ff523b';
+          return;
+        }
+
+        addToCart(product.id, qty, size);
+        showToast(`✓ Added ${qty} × ${product.name.substring(0,30)}... to cart`);
+      }
+    </script>
+  </body>
+</html>
