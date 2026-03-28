@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blipkart — Sign In</title>
+    <link rel="stylesheet" href="login.css" />
+
+    <!-- Montserrat font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+
+    <!-- Top branding bar -->
+    <div class="login-header">
+      <a href="index.html" class="login-logo">Blip<span>kart</span></a>
+    </div>
+
+    <!-- Welcome banner -->
+    <div class="login-welcome-banner" id="welcome-banner">
+      <span class="login-welcome-icon">👋</span>
+      <p>Welcome to Blipkart! Please <strong>sign in</strong> to your account, or <strong>sign up</strong> if you're new here.</p>
+      <button class="login-banner-close" onclick="document.getElementById('welcome-banner').style.display='none'">✕</button>
+    </div>
+
+    <!-- Main auth card -->
+    <div class="login-page-wrapper">
+      <div class="login-container">
+
+        <input type="checkbox" id="login-toggle" class="login-toggle-checkbox" />
+
+        <!-- Mobile-only tab bar -->
+        <div class="login-mobile-tabs">
+          <label for="login-toggle" class="mob-tab mob-tab-signin" id="mob-tab-signin">Sign In</label>
+          <label for="login-toggle" class="mob-tab mob-tab-signup" id="mob-tab-signup">Sign Up</label>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div class="login-form-container login-sign-up">
+          <form onsubmit="handleSignUp(event)">
+            <h1>Create Account</h1>
+            <div class="login-social-icons">
+              <div class="login-icon"><i class="fa-brands fa-google-plus-g"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-facebook-f"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            </div>
+            <span>or use your email for registration</span>
+            <input id="signup-name" placeholder="Name" type="text" required />
+            <input id="signup-email" placeholder="Email" type="email" required />
+            <input id="signup-password" placeholder="Password" type="password" required minlength="6" />
+            <p class="login-error" id="signup-error"></p>
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="login-form-container login-sign-in">
+          <form onsubmit="handleSignIn(event)">
+            <h1>Sign In</h1>
+            <div class="login-social-icons">
+              <div class="login-icon"><i class="fa-brands fa-google-plus-g"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-facebook-f"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="login-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+            </div>
+            <span>or use your email and password</span>
+            <input id="signin-email" placeholder="Email" type="email" required />
+            <input id="signin-password" placeholder="Password" type="password" required />
+            <a href="#">Forgot Your Password?</a>
+            <p class="login-error" id="signin-error"></p>
+            <button type="submit">Sign In</button>
+          </form>
+        </div>
+
+        <!-- Toggle Panel -->
+        <div class="login-toggle-container">
+          <div class="login-toggle">
+            <div class="login-toggle-panel login-toggle-left">
+              <h1>Welcome Back!</h1>
+              <p>Enter your personal details to use all of site features</p>
+              <label for="login-toggle">Sign In</label>
+            </div>
+            <div class="login-toggle-panel login-toggle-right">
+              <h1>Hello, Friend!</h1>
+              <p>Register with your personal details to use all of site features</p>
+              <label for="login-toggle">Sign Up</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      // ── Check if already logged in ────────────────────────────
+      if (sessionStorage.getItem('blipkart_user')) {
+        window.location.href = 'index.html';
+      }
+
+      // ── Sign Up ───────────────────────────────────────────────
+      function handleSignUp(e) {
+        e.preventDefault();
+        const name     = document.getElementById('signup-name').value.trim();
+        const email    = document.getElementById('signup-email').value.trim();
+        const password = document.getElementById('signup-password').value;
+        const errEl    = document.getElementById('signup-error');
+
+        if (!name || !email || !password) {
+          errEl.textContent = 'Please fill in all fields.';
+          return;
+        }
+        if (password.length < 6) {
+          errEl.textContent = 'Password must be at least 6 characters.';
+          return;
+        }
+
+        // Save user & redirect
+        sessionStorage.setItem('blipkart_user', JSON.stringify({ name, email }));
+        window.location.href = 'index.html';
+      }
+
+      // ── Sign In ───────────────────────────────────────────────
+      function handleSignIn(e) {
+        e.preventDefault();
+        const email    = document.getElementById('signin-email').value.trim();
+        const password = document.getElementById('signin-password').value;
+        const errEl    = document.getElementById('signin-error');
+
+        if (!email || !password) {
+          errEl.textContent = 'Please enter your email and password.';
+          return;
+        }
+
+        // For demo: accept any valid email + password combo
+        const name = email.split('@')[0];
+        sessionStorage.setItem('blipkart_user', JSON.stringify({ name, email }));
+        window.location.href = 'index.html';
+      }
+    </script>
+  </body>
+</html>

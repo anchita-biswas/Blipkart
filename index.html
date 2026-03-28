@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blipkart</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Font Montserat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for social icons in auth modal -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <main>
+
+
+    <!-- Header -->
+    <div class="header">
+      <div class="container">
+        <div class="navbar">
+          <a href="index.html" class="nav-logo">Blip<span>kart</span></a>
+          <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="login.html" id="nav-account-link">Account</a>
+          </div>
+          <div class="cart-icon-wrapper">
+            <a href="cart.html">🛒</a>
+            <span id="cart-count" class="cart-badge">0</span>
+          </div>
+          <label class="menu-icon" for="menu-toggle">
+            <img src="images/menu.png" alt="Menu" />
+          </label>
+        </div>
+        <input type="checkbox" id="menu-toggle" />
+        <div class="hidden-nav-items">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+          <a href="login.html" id="hidden-nav-account-link">Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+    <div class="hero">
+      <div class="hero-bg-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <!-- Text Side -->
+          <div class="hero-text">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              New Collection 2026 — Now Live
+            </div>
+            <h1>
+              Gear Up.<br />
+              <span class="hero-highlight">Perform.</span><br />
+              Dominate.
+            </h1>
+            <p>
+              Where performance meets style. Experience sportswear<br />
+              engineered for excellence, designed for champions.
+            </p>
+
+            <!-- Stats row -->
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>50K+</strong>
+                <span>Happy Athletes</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <strong>500+</strong>
+                <span>Premium Products</span>
+              </div>
+              <div class="hero-stat-divider"></div>
+              <div class="hero-stat">
+                <strong>4.9★</strong>
+                <span>Avg. Rating</span>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="hero-ctas">
+              <a href="products.html" class="hero-btn-primary">
+                Shop Now &nbsp;→
+              </a>
+              <a href="#categories-section" class="hero-btn-secondary">
+                Explore Gear
+              </a>
+            </div>
+
+            <!-- Trust chips -->
+            <div class="hero-trust">
+              <span>✅ Free Delivery over ₹999</span>
+              <span>🔄 Easy 30-Day Returns</span>
+              <span>🔒 Secure Checkout</span>
+            </div>
+          </div>
+
+          <!-- Image Side -->
+          <div class="hero-image-wrapper">
+            <div class="hero-img-glow"></div>
+            <div class="hero-img-card">
+              <img src="images/img 1.jpg" alt="Elite Athlete Gear" />
+            </div>
+            <!-- Floating badges on image -->
+            <div class="hero-float-badge hero-float-top">🔥 Trending Today</div>
+            <div class="hero-float-badge hero-float-bottom">
+              <strong>Up to 50% OFF</strong> on select items
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== /HERO ===================== -->
+
+    <!-- ===================== CATEGORIES ===================== -->
+    <div class="categories" id="categories-section">
+      <div class="categories-header">
+        <p class="categories-eyebrow">What are you looking for?</p>
+        <h2>Shop by Category</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="category-card">
+          <img src="images/img 2.jpg" alt="Footwear" />
+          <div class="category-overlay">
+            <span class="category-icon">👟</span>
+            <strong>Footwear</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="images/img 3.jpg" alt="Apparel" />
+          <div class="category-overlay">
+            <span class="category-icon">👕</span>
+            <strong>Apparel</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="images/img 4.jpg" alt="Accessories" />
+          <div class="category-overlay">
+            <span class="category-icon">🎧</span>
+            <strong>Accessories</strong>
+            <span class="category-cta">Shop Now →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===================== /CATEGORIES ===================== -->
+
+    <!-- Featured Products -->
+    <div class="featured-products">
+      <div class="featuredProductsHeader">
+        <h2>Featured Products</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
+      </div>
+      <div class="productContainer" id="featured-products-container">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+
+    <!-- Latest Products -->
+    <div class="featured-products" style="margin-top: 20px">
+      <div class="featuredProductsHeader">
+        <h2>Latest Products</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
+      </div>
+      <div class="productContainer" id="latest-products-container">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+      <div class="exclusiveProductsHeader">
+        <h2>Blipkart Exclusives</h2>
+        <div class="customUnderlineContainer">
+          <div class="customUnderline"></div>
+        </div>
+      <div class="container">
+        <div class="bannerImg">
+          <img src="images/img 9.webp" alt="Smart Watch Banner" />
+        </div>
+        <div class="bannerContent">
+          <span class="bannerTitle">Exclusively on Blipkart</span>
+          <h1 class="bannerSubTitle">Smart<br/>Watch</h1>
+          <span class="bannerDescription"
+            >Hammer ColorFit Pro 5 — 1.85" HD Display, SpO2 & Heart Rate, 7-Day
+            Battery</span
+          >
+          <div>
+            <button
+              class="buyNowButton"
+              onclick="window.location = 'product-details.html?id=12'"
+            >
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonialParentContainer">
+      <div class="testimonialInnerContainer">
+        <div class="testimonialCards">
+          <p class="testimonialContetnt">
+            "Blipkart has completely transformed my shopping experience. The
+            products are genuine, delivery is fast, and the prices are
+            unbeatable!"
+          </p>
+          <div class="testimonialRatings">
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+          </div>
+          <img class="userImg" src="images/testimonial 3.jpg" alt="" />
+          <h3>Priya Sharma</h3>
+        </div>
+        <div class="testimonialCards">
+          <p class="testimonialContetnt">
+            "Got my Puma running shoes at 35% off. The quality is excellent and
+            they arrived within 2 days. Blipkart is my go-to for sports gear!"
+          </p>
+          <div class="testimonialRatings">
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/empty star.png" alt="star" width="15px" />
+          </div>
+          <img class="userImg" src="images/testimonial 1.jpg" alt="" />
+          <h3>George Smith</h3>
+        </div>
+        <div class="testimonialCards">
+          <p class="testimonialContetnt">
+            "Amazing variety of products! Ordered the boAt earphones and the
+            Noise smartwatch. Both are fantastic. Will definitely shop again
+            from Blipkart."
+          </p>
+          <div class="testimonialRatings">
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/star.png" alt="star" width="15px" />
+            <img src="images/empty star.png" alt="star" width="15px" />
+          </div>
+          <img class="userImg" src="images/testimonial 2.jpg" alt="" />
+          <h3>Arjun Kapoor</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branding -->
+    <div class="brandingContainer">
+      <div class="brandingInnerContainer">
+        <img src="images/Godrej_Logo.svg.png" alt="Godrej" />
+        <img src="images/oppo logo.png" alt="Oppo" />
+        <img src="images/Coca-Cola_logo.svg.png" alt="Coca Cola" />
+        <img src="images/PayPal.svg.png" alt="PayPal" />
+        <img src="images/philips-logo-png_seeklogo-108446.png" alt="Philips" />
+      </div>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footerInnerContainer">
+        <div class="footerColumn footerColumn1">
+          <div class="footerBrand">Blip<span>kart</span></div>
+          <p>
+            Your one-stop destination for premium sportswear, footwear, and
+            accessories.
+          </p>
+          <h3>Download Our App</h3>
+          <p>Available on Android and iOS</p>
+          <div class="footerStoreContainer">
+            <img src="images/google play.png" alt="Google Play" />
+            <img src="images/app store.webp" alt="App Store" />
+          </div>
+        </div>
+        <div class="footerColumn footerColumn2">
+          <h3>Useful Links</h3>
+          <p>Coupons</p>
+          <p>Blog Post</p>
+          <p>Return Policy</p>
+          <p>Join Affiliate</p>
+        </div>
+        <div class="footerColumn footerColumn3">
+          <h3>Follow Us</h3>
+          <p>Facebook</p>
+          <p>Twitter</p>
+          <p>Instagram</p>
+          <p>Youtube</p>
+        </div>
+      </div>
+      <div class="footer-credits">
+          <p>© 2026 <a href="https://anchita-biswas.github.io/Developer-Portfolio/" target="_blank">Anchita.</a>
+             Designed & Built with ❤️
+          </p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+      // ── Product injection ──────────────────────────────────────
+      const featured = [1, 6, 7, 10];
+      const latest = [2, 3, 4, 5, 8, 9, 11, 12];
+
+      document.getElementById("featured-products-container").innerHTML =
+        featured
+          .map((id) =>
+            buildProductCardHTML(BLIPKART_PRODUCTS.find((p) => p.id === id)),
+          )
+          .join("");
+
+      document.getElementById("latest-products-container").innerHTML = latest
+        .map((id) =>
+          buildProductCardHTML(BLIPKART_PRODUCTS.find((p) => p.id === id)),
+        )
+        .join("");
+
+      // ── Auth gate ─────────────────────────────────────────────
+      // If user is not logged in, redirect to login page immediately
+      const blipUser = sessionStorage.getItem('blipkart_user');
+      if (!blipUser) {
+        window.location.href = 'login.html';
+      } else {
+        // User is logged in — personalise the Account link
+        const userData = JSON.parse(blipUser);
+        const firstName = userData.name.split(' ')[0];
+
+        const acctLink = document.getElementById('nav-account-link');
+        if (acctLink) {
+          acctLink.textContent = '👤 ' + firstName;
+          acctLink.href = '#';
+          acctLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Sign out of Blipkart?')) {
+              sessionStorage.removeItem('blipkart_user');
+              window.location.href = 'login.html';
+            }
+          });
+        }
+
+        const hiddenAcctLink = document.getElementById('hidden-nav-account-link');
+        if (hiddenAcctLink) {
+          hiddenAcctLink.textContent = '👤 ' + firstName + ' (Sign out)';
+          hiddenAcctLink.href = '#';
+          hiddenAcctLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('blipkart_user');
+            window.location.href = 'login.html';
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

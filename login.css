@@ -1,0 +1,515 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(135deg, #ff8c00, #ff5f1f);
+  min-height: 100vh;
+}
+
+/* ── Branding bar ── */
+.login-header {
+  width: 100%;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.login-logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.login-logo span {
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Welcome banner ── */
+.login-welcome-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin: 0 auto 20px;
+  max-width: 700px;
+  width: calc(100% - 40px);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.login-welcome-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.login-welcome-banner strong {
+  font-weight: 700;
+}
+
+.login-banner-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  opacity: 0.7;
+  padding: 2px 5px;
+}
+
+.login-banner-close:hover {
+  opacity: 1;
+}
+
+/* ── Page wrapper ── */
+.login-page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 40px;
+}
+
+/* ── Auth card ── */
+.login-container {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  min-height: 480px;
+}
+
+/* ── Hidden toggle driver ── */
+.login-toggle-checkbox {
+  display: none;
+}
+
+/* ── Form containers ── */
+.login-form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.login-sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  opacity: 1;
+}
+
+.login-sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.login-form-container form {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px 36px;
+  height: 100%;
+}
+
+.login-form-container form h1 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 14px;
+}
+
+.login-form-container form span {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.login-form-container form input {
+  background: #f0f0f0;
+  border: none;
+  margin: 5px 0;
+  padding: 11px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  transition: background 0.2s;
+}
+
+.login-form-container form input:focus {
+  background: #e5e5e5;
+}
+
+.login-form-container form a {
+  color: #555;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 8px 0 4px;
+}
+
+.login-form-container form button[type="submit"] {
+  background: linear-gradient(135deg, #ff523b, #ff8c00);
+  color: #fff;
+  font-size: 12px;
+  padding: 11px 40px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 14px rgba(255, 82, 59, 0.3);
+  font-family: "Montserrat", sans-serif;
+}
+
+.login-form-container form button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 82, 59, 0.4);
+}
+
+/* Error text */
+.login-error {
+  color: #e53e3e;
+  font-size: 11px;
+  margin-top: 4px;
+  min-height: 14px;
+  text-align: center;
+}
+
+/* ── Social icons ── */
+.login-social-icons {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 8px;
+}
+
+.login-icon {
+  border: 1px solid #ddd;
+  border-radius: 20%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.25s;
+}
+
+.login-icon:hover {
+  border-color: #ff523b;
+  color: #ff523b;
+  transform: scale(1.1);
+}
+
+/* ── Sliding toggle panel ── */
+.login-toggle-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  border-radius: 140px 0 0 70px;
+  z-index: 1000;
+}
+
+.login-toggle {
+  background: linear-gradient(135deg, #ff523b, #ff8c00);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.login-toggle-panel {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 28px;
+  text-align: center;
+  top: 0;
+  transition: all 0.6s ease-in-out;
+}
+
+.login-toggle-panel h1 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.login-toggle-panel p {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.88;
+  margin-bottom: 20px;
+}
+
+.login-toggle-panel label {
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 24px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "Montserrat", sans-serif;
+}
+
+.login-toggle-panel label:hover {
+  background: #fff;
+  color: #ff523b;
+}
+
+.login-toggle-left {
+  transform: translateX(-200%);
+}
+
+.login-toggle-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+/* ── Checkbox-driven flip to Sign Up ── */
+.login-toggle-checkbox:checked ~ .login-toggle-container {
+  border-radius: 0 70px 140px 0;
+  transform: translateX(-100%);
+}
+
+.login-toggle-checkbox:checked ~ .login-toggle-container .login-toggle {
+  transform: translateX(50%);
+}
+
+.login-toggle-checkbox:checked ~ .login-toggle-container .login-toggle-right {
+  transform: translateX(200%);
+}
+
+.login-toggle-checkbox:checked ~ .login-toggle-container .login-toggle-left {
+  transform: translateX(0);
+}
+
+.login-toggle-checkbox:checked ~ .login-sign-up {
+  z-index: 3;
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+.login-toggle-checkbox:checked ~ .login-sign-in {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* =============================================
+   RESPONSIVE — tablets (≤ 640px)
+   ============================================= */
+@media (max-width: 640px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .login-page-wrapper {
+    padding: 0 16px 32px;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    border-radius: 16px;
+    /* Switch from 2-column sliding layout to single stacked layout */
+    min-height: unset;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Hide the orange sliding toggle panel — replaced by tab-style labels below */
+  .login-toggle-container {
+    display: none !important;
+  }
+
+  /* Both forms are full-width and static (no absolute positioning) */
+  .login-form-container {
+    position: relative !important;
+    top: unset !important;
+    left: unset !important;
+    width: 100% !important;
+    height: unset !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    z-index: auto !important;
+  }
+
+  /* Show sign-in by default, hide sign-up */
+  .login-sign-in {
+    display: flex;
+  }
+
+  .login-sign-up {
+    display: none;
+  }
+
+  /* When toggle is checked: show sign-up, hide sign-in */
+  .login-toggle-checkbox:checked ~ .login-sign-up {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .login-toggle-checkbox:checked ~ .login-sign-in {
+    display: none !important;
+  }
+
+  /* Add tab-style switch buttons inside the card */
+  .login-container::before {
+    content: "";
+    display: block;
+    height: 56px;
+    background: #f8f8f8;
+    border-radius: 16px 16px 0 0;
+    flex-shrink: 0;
+  }
+
+  .login-form-container form {
+    padding: 20px 24px 32px;
+    height: unset;
+  }
+
+  .login-form-container form h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .login-social-icons {
+    gap: 8px;
+  }
+
+  .login-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .login-welcome-banner {
+    font-size: 12px;
+    padding: 10px 14px 10px 14px;
+    border-radius: 10px;
+    width: calc(100% - 32px);
+  }
+
+  .login-header {
+    padding: 14px 16px;
+  }
+
+  .login-logo {
+    font-size: 22px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — small phones (320–480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .login-form-container form input {
+    font-size: 14px; /* prevents iOS zoom on focus */
+    padding: 12px 14px;
+  }
+
+  .login-form-container form h1 {
+    font-size: 18px;
+  }
+
+  .login-form-container form button[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+/* ── Mobile tab bar ── */
+.login-mobile-tabs {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .login-mobile-tabs {
+    display: flex;
+    width: 100%;
+    background: #f8f8f8;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  .mob-tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #aaa;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .mob-tab-signin {
+    color: #ff523b;
+    border-bottom: 2px solid #ff523b;
+  }
+
+  .login-toggle-checkbox:checked ~ .login-mobile-tabs .mob-tab-signin {
+    color: #aaa;
+    border-bottom: 2px solid transparent;
+  }
+
+  .login-toggle-checkbox:checked ~ .login-mobile-tabs .mob-tab-signup {
+    color: #ff523b;
+    border-bottom: 2px solid #ff523b;
+  }
+
+  .mob-tab-signup {
+    border-bottom: 2px solid transparent;
+  }
+}
+
